@@ -3,6 +3,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col,from_json,to_utc_timestamp
 import boto3
 from botocore.exceptions import ClientError
+import json
 
 pkgs = [
     "net.snowflake:snowflake-jdbc:3.13.3",
@@ -64,13 +65,9 @@ def get_secret(secret_name):
         else:
             binary_secret_data = get_secret_value_response['SecretBinary']
         return
-def load(df,sfOptions,SNOWFLAKE_SOURCE_NAME):
+def load(df):
+    sf_secrets = json.loads(get_secret('snowflake/capstone/login'))
 
-    df.write.format("net.snowflake.spark.snowflake").options(sfOptions).option("dbtable", "capstone").mode(SaveMode.Overwrite).save()
-    return
-
-if __name__ == "__main__":
-    sf_secrets = get_secret('snowflake/capstone/login')
     sfOptions = {
     "sfURL":sf_secrets["URL"],
     "sfUser" :sf_secrets["USER_NAME"],
@@ -79,7 +76,13 @@ if __name__ == "__main__":
     "sfSchema" : "NIELS",
     "sfWarehouse" : sf_secrets["WAREHOUSE"]
     }
-    print(sfOptions)
+
+    df.write.format("net.snowflake.spark.snowflake").options(**sfOptions).option("dbtable", "capstone_niels").mode("overwrite").save()
+    return
+
+if __name__ == "__main__":
+
     df = transform(ingest(s3_path))
+    load(df)
     
     
