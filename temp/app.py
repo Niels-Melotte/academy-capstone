@@ -45,6 +45,7 @@ def extract_data(spark: SparkSession, date: str) -> DataFrame:
     :param spark: Spark session object.
     :return: Spark DataFrame.
     """
+    s3_path = 's3a://dataminded-academy-capstone-resources2/raw/open_aq/'
 
     return spark.read.json(s3_path)
 
@@ -106,6 +107,7 @@ def load_data(spark: SparkSession, data: DataFrame):
     :param data: DataFrame to write.
     :return: None
     """
+    
     sf_secrets = json.loads(get_secret('snowflake/capstone/login'))
 
     sfOptions = {
@@ -119,17 +121,6 @@ def load_data(spark: SparkSession, data: DataFrame):
 
     data.write.format("net.snowflake.spark.snowflake").options(**sfOptions).option("dbtable", "capstone_niels").mode("overwrite").save()
     return
-
-    # Uncomment the following block to write to a compatible catalog
-    # spark.catalog.setCurrentDatabase("DEFAULT_DB")
-    # (
-    #     data.coalesce(1)
-    #     .write.partitionBy("ds")
-    #     .mode("overwrite")
-    #     .format("parquet")
-    #     .saveAsTable("sample")
-    # )
-
 
 if __name__ == "__main__":
     main()
