@@ -1,0 +1,13 @@
+docker:
+    path: .
+id: e36a171f-af59-4222-b17f-bf7923c3fcc5
+name: niels-capstone
+resources:
+    path: resources
+streaming:
+    filename: streaming.yaml
+template: pyspark
+version: "0.3"
+workflows:
+    path: dags
+    version: "2"
