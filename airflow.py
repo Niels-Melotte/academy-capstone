@@ -15,4 +15,5 @@ submit_batch_job = BatchOperator(
     job_name=batch_job_name,
     job_queue="academy-capstone-winter-2023-job-queue",
     job_definition="Niels-capstone",
-    dag=dag)
+    dag=dag,
+    overrides="")
