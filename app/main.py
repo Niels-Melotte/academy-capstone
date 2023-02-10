@@ -11,7 +11,7 @@ pkgs = [
     "org.apache.hadoop:hadoop-aws:3.1.2"
 ]
 
-config = {  "spark.hadoop.fs.s3a.aws.credentials.provider":"com.amazonaws.auth.EnvironmentVariableCredentialsProvider",
+config = {  "spark.hadoop.fs.s3a.aws.credentials.provider":"com.amazonaws.auth.DefaultAWSCredentialsProviderChain",
             "spark.jars.packages": ",".join(pkgs)}
 conf = SparkConf().setAll(config.items())
 spark = SparkSession.builder.config(conf=conf).getOrCreate()
