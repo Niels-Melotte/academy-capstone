@@ -1,4 +1,4 @@
-# Niels-capstone-2
+# Niels-capstone-3
 
 ## Prerequisites
 

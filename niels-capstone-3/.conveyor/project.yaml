@@ -1,7 +1,7 @@
 docker:
     path: .
-id: 18a454f0-fe00-4eb3-9a7d-7c657756e461
-name: niels-capstone-2
+id: 07496a77-7374-4d46-8833-f17017179d13
+name: niels-capstone-3
 resources:
     path: resources
 streaming:

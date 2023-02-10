@@ -4,15 +4,15 @@ from pyspark.sql import SparkSession
 from pyspark.sql import Row
 from pyspark.sql.dataframe import DataFrame
 
-from nielscapstone2.common.spark import ClosableSparkSession, transform, SparkLogger
-from nielscapstone2.transformations.shared import add_ds
+from nielscapstone3.common.spark import ClosableSparkSession, transform, SparkLogger
+from nielscapstone3.transformations.shared import add_ds
 
 
 DataFrame.transform = transform
 
 
 def main():
-    parser = argparse.ArgumentParser(description="niels-capstone-2")
+    parser = argparse.ArgumentParser(description="niels-capstone-3")
     parser.add_argument(
         "-d", "--date", dest="date", help="date in format YYYY-mm-dd", required=True
     )
@@ -21,7 +21,7 @@ def main():
     )
     args = parser.parse_args()
 
-    with ClosableSparkSession("niels-capstone-2") as session:
+    with ClosableSparkSession("niels-capstone-3") as session:
         run(session, args.env, args.date)
 
 

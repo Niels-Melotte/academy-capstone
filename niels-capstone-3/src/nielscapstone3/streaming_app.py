@@ -2,17 +2,17 @@ import argparse
 
 from pyspark.sql import SparkSession
 
-from nielscapstone2.common.spark import ClosableSparkSession, SparkLogger
+from nielscapstone3.common.spark import ClosableSparkSession, SparkLogger
 
 
 def main():
-    parser = argparse.ArgumentParser(description="niels-capstone-2")
+    parser = argparse.ArgumentParser(description="niels-capstone-3")
     parser.add_argument(
         "-e", "--env", dest="env", help="environment we are executing in", required=True
     )
     args = parser.parse_args()
 
-    with ClosableSparkSession("niels-capstone-2") as session:
+    with ClosableSparkSession("niels-capstone-3") as session:
         run(session, args.env)
 
 

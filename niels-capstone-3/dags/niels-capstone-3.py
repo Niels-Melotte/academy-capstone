@@ -17,7 +17,7 @@ default_args = {
 
 
 dag = DAG(
-    "niels-capstone-2",
+    "niels-capstone-3",
     default_args=default_args,
     schedule_interval="@daily",
     max_active_runs=1,
@@ -29,8 +29,8 @@ sample_task = ConveyorSparkSubmitOperatorV2(
     num_executors="1",
     driver_instance_type="mx.small",
     executor_instance_type="mx.small",
-    aws_role="niels-capstone-2-{{ macros.conveyor.env() }}",
+    aws_role="niels-capstone-3-{{ macros.conveyor.env() }}",
     spark_main_version=3,
-    application="local:///opt/spark/work-dir/src/nielscapstone2/app.py",
+    application="local:///opt/spark/work-dir/src/nielscapstone3/app.py",
     application_args=["--date", "{{ ds }}", "--env", "{{ macros.conveyor.env() }}"],
 )
